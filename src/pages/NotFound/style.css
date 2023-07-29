@@ -1,0 +1,26 @@
+.notFound__wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.notFound a {
+  margin-top: 20px;
+  display: block;
+  padding: 9px 21px 6px 11px;
+  font-size: 19px;
+  line-height: 1.211;
+  font-weight: 300;
+  font-style: oblique;
+  border-radius: 3px;
+  transition: background 0.3s, color 0.3s, text-shadow 0.3s;
+  text-shadow: 1px 0 0, 0.5px 0 0, -1px 0 0;
+  color: #fff;
+  background-color: #4481c3;
+}
