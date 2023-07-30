@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
@@ -19,9 +17,8 @@ function OfferPage () {
       axios.get(`https://11.react.pages.academy/six-cities-simple/hotels/${id}/nearby`).then(res => setNearData(res.data))
     }, [])
   } catch (err) {
-    alert("Ошибка при запросе данных")
-    console.log(err)
-  }
+    console.log(err) 
+  };
 
   const [data, setData] = useState<IOffer>();
   const [nearData, setNearData] = useState<IOffer[]>();
@@ -34,7 +31,6 @@ function OfferPage () {
   nearData?.sort(filterBy('rating')).reverse()
   const sortRecommended = nearData?.slice(0,3);
 
-  console.log(sortRecommended)
 
   const rating = data?.rating;  
   return (

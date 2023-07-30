@@ -31,3 +31,9 @@ export interface IOffer {
   };
   id: number;
 }
+
+export interface IReview {
+  text: string;
+  rating: number;
+  currentTime: Date;
+}

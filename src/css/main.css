@@ -1651,11 +1651,29 @@ img {
 .header__logo-link:not(.header__logo-link--active):hover {
   opacity: 0.5;
 }
-.htmlForm__rating-label svg:hover {
-  cursor: pointer;
-  fill: #ff9000;
+.reviews__htmlForm {
+  display: flex;
+  flex-direction: column;
 }
-.icon-fill:hover {
-  fill: #ff9000;
+.htmlForm__rating {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+}
+.icon-star {
+  display: inline-flex;
+  font-size: 40px;
+}
+.icon-star:hover,
+.icon-star:hover ~ .icon-star {
+  cursor: pointer;
+  color: #ff9000;
+}
+.htmlForm__rating[data-total-value="1"] .icon-star:nth-child(n + 5),
+.htmlForm__rating[data-total-value="2"] .icon-star:nth-child(n + 4),
+.htmlForm__rating[data-total-value="3"] .icon-star:nth-child(n + 3),
+.htmlForm__rating[data-total-value="4"] .icon-star:nth-child(n + 2),
+.htmlForm__rating[data-total-value="5"] .icon-star:nth-child(n + 1) {
+  color: #ff9000;
 }
 /*# sourceMappingURL=main.css.map */
