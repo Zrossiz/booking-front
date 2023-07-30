@@ -1,7 +1,18 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../redux/store';
+import { setAuth } from '../../redux/slices/authSlice';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { email, isAuth } = useSelector((state: RootState) => state.auth)
+  const logout = () => {
+    dispatch(setAuth({
+      email: "",
+      password: "",
+      isAuth: false,
+    }))
+  }
   return (
     <header className='header'>
       <div className='container'>
@@ -13,17 +24,27 @@ const Header = () => {
           </div>
           <nav className='header__nav'>
             <ul className='header__nav-list'>
-              <li className='header__nav-item user'>
-                <div className='header__nav-profile'>
-                  <div className='header__avatar-wrapper user__avatar-wrapper'></div>
-                  <span className='header__user-name user__name'>Oliver.conner@gmail.com</span>
-                </div>
-              </li>
-              <li className='header__nav-item'>
-                <a className='header__nav-link' href='#'>
-                  <span className='header__signout'>Sign out</span>
-                </a>
-              </li>
+              { isAuth ? 
+                  <>
+                    <li className='header__nav-item user'>
+                      <div className='header__nav-profile'>
+                        <div className='header__avatar-wrapper user__avatar-wrapper'></div>
+                        <span className='header__user-name user__name'>{email}</span>
+                      </div>
+                    </li>
+                    <li className='header__nav-item'>
+                      <Link className='header__nav-link' to='/'>
+                        <span onClick={() => logout()} className='header__signout'>Sign out</span>
+                      </Link>
+                    </li> 
+                  </>
+                :
+                <li className='header__nav-item'>
+                  <Link to="/login">
+                    <span className='header__signout'>Sign in</span>
+                  </Link>
+                </li> 
+              }
             </ul>
           </nav>
         </div>

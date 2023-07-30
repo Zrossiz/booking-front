@@ -1,8 +1,26 @@
-import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../../elements/header';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '../../redux/slices/authSlice';
 
 function LoginPage () {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [emailUser, setEmailUser] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const userData = {
+    email: emailUser,
+    password: '',
+    isAuth: true,
+  }
+
+  const redirectToMain = () => {
+    dispatch(setAuth(userData));
+    navigate('/')
+  }
   return (
     <>
       <Helmet>
@@ -20,16 +38,22 @@ function LoginPage () {
             <div className="page__login-container container">
               <section className="login">
                 <h1 className="login__title">Sign in</h1>
-                <form className="login__htmlForm htmlForm" action="#" method="post">
+                <form className="login__htmlForm htmlForm">
                   <div className="login__input-wrapper htmlForm__input-wrapper">
                     <label className="visually-hidden">E-mail</label>
-                    <input className="login__input htmlForm__input" type="email" name="email" placeholder="Email" required={undefined} />
+                    <input value={emailUser} onChange={(e) => setEmailUser(e.target.value)} className="login__input htmlForm__input" type="email" name="email" placeholder="Email" required={undefined} />
                   </div>
                   <div className="login__input-wrapper htmlForm__input-wrapper">
                     <label className="visually-hidden">Password</label>
-                    <input className="login__input htmlForm__input" type="password" name="password" placeholder="Password" required={undefined} />
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} className="login__input htmlForm__input" type="password" name="password" placeholder="Password" required={undefined} />
                   </div>
-                  <button className="login__submit htmlForm__submit button" type="submit">Sign in</button>
+                  <button 
+                    className="login__submit htmlForm__submit button"
+                    disabled={password.length >= 3 ? false : true}
+                    onClick={() => redirectToMain()}
+                  >
+                    Sign in
+                  </button>
                 </form>
               </section>
               <section className="locations locations--login locations--current">
